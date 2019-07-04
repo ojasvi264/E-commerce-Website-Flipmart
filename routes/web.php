@@ -31,8 +31,11 @@ Route::get('/dashboard', function () {
 Route::get('/welcome/{users}', function ($user) {
     return 'welcome  '.$user;
 });
+Route::prefix('/')->namespace('Frontend')->group(function() {
+    Route::get('', 'FrontController@index')->name('frontend.index');
+});
 
-Route::prefix('backend')->middleware('auth')->middleware('CheckPermission')->namespace('Backend')->group(function() {
+Route::prefix('backend')->middleware('auth')->namespace('Backend')->group(function() {
 //index
     Route::get('category', 'CategoryController@index')->name('category.index');
 //create form
@@ -169,6 +172,22 @@ Route::prefix('backend')->middleware('auth')->middleware('CheckPermission')->nam
 
     Route::get('role/assignpermission/{id}', 'RoleController@assignPermission')->name('role.assignpermission');
     Route::post('role/savepermission/{id}', 'RoleController@savePermission')->name('role.savepermission');
+
+
+    //index
+    Route::get('user', 'UserController@index')->name('user.index');
+//create form
+    Route::get('user/create', 'UserController@create')->name('user.create');
+//Store into database
+    Route::post('user', 'UserController@store')->name('user.store');
+//view details
+    Route::get('user/{id}', 'UserController@show')->name('user.show');
+//edit form
+    Route::get('user/{id}/edit', 'UserController@edit')->name('user.edit');
+//update into database
+    Route::put('user/{id}', 'UserController@update')->name('user.update');
+//delete from database
+    Route::delete('user/{id}', 'UserController@destroy')->name('user.destroy');
 
 });
 Auth::routes();

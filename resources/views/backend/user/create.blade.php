@@ -44,8 +44,8 @@
                         <label for="role_id">Role Id</label>
                         <select name="role_id" class="form-control">
                             <option value="">Select Role</option>
-                            @foreach($data['users'] as $user)
-                                <option value="{{$user->id}}">{{$user->name}}</option>
+                            @foreach($data['roles'] as $role)
+                                <option value="{{$role->id}}">{{$role->name}}</option>
                             @endforeach
                         </select>
                         @include('includes.single_field_validation',['field'=>'role_id'])
@@ -64,7 +64,7 @@
 
                     <div class="form-group">
                         <label for="route">Password</label>
-                        <input type="text" name="password" class="form-control" id="password"/>
+                        <input type="password" name="password" class="form-control" id="password"/>
                         @include('includes.single_field_validation',['field'=>'password'])
                     </div>
 

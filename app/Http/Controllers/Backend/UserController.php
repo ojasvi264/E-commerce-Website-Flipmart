@@ -78,6 +78,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        $data['roles']=Role::all();
         $data['user']=User::find($id);
         return view('backend.user.edit',compact('data'));
     }

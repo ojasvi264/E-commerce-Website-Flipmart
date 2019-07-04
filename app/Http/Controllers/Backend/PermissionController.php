@@ -76,6 +76,7 @@ class PermissionController extends Controller
      */
     public function edit($id)
     {
+        $data['modules']=Module::all();
         $data['permission']=Permission::find($id);
         return view('backend.permission.edit',compact('data'));
     }

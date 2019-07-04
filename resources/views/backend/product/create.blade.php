@@ -83,7 +83,6 @@
                                     <label for="name">SubCategory Name</label>
                                     <select name="subcategory_id" id="subcategory_id" class="form-control">
                                         <option value="">Select SubCategory</option>
-
                                     </select>
                                 </div>
                                 <div class="form-group">

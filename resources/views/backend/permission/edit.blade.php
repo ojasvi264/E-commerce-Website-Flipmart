@@ -46,7 +46,12 @@
                     @csrf
                     <div class="form-group">
                         <label for="module_id">Module Id</label>
-                        <input type="text" name="module_id" class="form-control" id="module_id" value="{{$data['permission']->module_id}}"/>
+                        <select name="module_id" class="form-control">
+                            <option value="">Select Module</option>
+                            @foreach($data['modules'] as $module)
+                                <option value="{{$module->id}}">{{$module->name}}</option>
+                            @endforeach
+                        </select>
                         @include('includes.single_field_validation',['field'=>'module_id'])
                     </div>
                     <div class="form-group">

@@ -1,6 +1,33 @@
 @extends('layouts.backend')
 @section('title','Product Create page')
+@section('js')
+    @include('backend.product.Include.add_row')
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $(document).ready(function () {
+            $('#category_id').change(function(){
+                category_id = $(this).val();
+                path="{{route('category.subcategory')}}";
+                $.ajax({
+                    url: path,
+                    data: {'cid' :category_id},
+                    method: 'post',
+                    datatype: 'text',
+                    success: function (response) {
+                        $('#subcategory_id').empty();
+                        $('#subcategory_id').append(response);
 
+                    }
+                });
+            });
+
+        });
+    </script>
+@endsection
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -46,12 +73,19 @@
                     @csrf
                     <div class="form-group">
                         <label for="category_name">Category Name</label>
-                        <input type="text" name="category_name" class="form-control" id="category_name" value="{{$data['product']->category_name}}"/>
+                        <select name="category_id" id="category_id" class="form-control">
+                            <option value="">Select Category</option>
+                            @foreach($data['categories'] as $category)
+                                <option value="{{$category->id}}">{{$category->name}}</option>
+                            @endforeach
+                        </select>
                         @include('includes.single_field_validation',['field'=>'category_name'])
                     </div>
                     <div class="form-group">
-                        <label for="subcategory_name">SubCategory Name</label>
-                        <input type="text" name="subcategory_name" class="form-control" id="name" value="{{$data['product']->subcategory_name}}"/>
+                        <label for="name">SubCategory Name</label>
+                        <select name="subcategory_id" id="subcategory_id" class="form-control">
+                            <option value="">Select SubCategory</option>
+                        </select>
                         @include('includes.single_field_validation',['field'=>'subcategory_name'])
                     </div>
                     <div class="form-group">

@@ -40,7 +40,7 @@
                     <thead>
                         <tr>
                             <th>SN</th>
-                            <th>User Id</th>
+                            <th>Role Id</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Action</th>

@@ -13,7 +13,7 @@ class UserRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,26 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+              return [
+                  'role_id'=>'required|integer',
+                  'name'=>'string|max:191|required|unique:permissions'.(request()->method()=="POST"?'':',name,'.$this->id),
+                  'password'=>'required|string|max:191',
+                  'email'=>'required|string|max:191',
+
+              ];
+        function messages()
+        {
+            return [
+                'role_id.required'=>'Please Enter Role Id',
+                'role_id.integer'=>'Role Id must be of integer type',
+                'name.required'=>'Please Enter Your Name',
+                'name.unique'=>'Name must be unique',
+                'name.string'=>'Name must be of string type',
+                'email.required'=>'Please Enter Route',
+                'email.string'=>'Route must be of string type',
+                'password.required'=>'Please Enter Route',
+                'password.string'=>'Route must be of string type',
+            ];
+        }
     }
 }

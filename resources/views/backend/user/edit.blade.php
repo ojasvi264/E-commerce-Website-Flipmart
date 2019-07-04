@@ -46,7 +46,12 @@
                     @csrf
                     <div class="form-group">
                         <label for="role_id">Role Id</label>
-                        <input type="number" name="role_id" class="form-control" id="role_id" value="{{$data['user']->role_id}}"/>
+                        <select name="role_id" class="form-control">
+                            <option value="">Select Role</option>
+                            @foreach($data['roles'] as $role)
+                                <option value="{{$role->id}}">{{$role->name}}</option>
+                            @endforeach
+                        </select>
                         @include('includes.single_field_validation',['field'=>'role_id'])
                     </div>
                     <div class="form-group">

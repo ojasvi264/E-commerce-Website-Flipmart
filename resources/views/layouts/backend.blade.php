@@ -250,6 +250,16 @@
                         <li><a href="{{route('product.index')}}"><i class="fa fa-circle-o"></i> List</a></li>
                     </ul>
                 </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-files-o"></i>
+                        <span>User Management</span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{route('user.create')}}"><i class="fa fa-circle-o"></i> Create</a></li>
+                        <li><a href="{{route('user.index')}}"><i class="fa fa-circle-o"></i> List</a></li>
+                    </ul>
+                </li>
             </ul>
         </section>
         <!-- /.sidebar -->

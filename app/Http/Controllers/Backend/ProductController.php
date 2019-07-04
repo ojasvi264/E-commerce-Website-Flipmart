@@ -104,6 +104,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
+        $data['categories']=Category::all();
+        $data['subcategories']=SubCategory::all();
         $data['product']=Product::find($id);
         return view('backend.product.edit',compact('data'));
     }

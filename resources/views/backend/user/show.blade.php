@@ -42,8 +42,8 @@
                 <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <th>User Id</th>
-                        <td>{{$data['user']->module_id}}</td>
+                        <th>Role Id</th>
+                        <td>{{$data['user']->role_id}}</td>
                     </tr>
                     <tr>
                         <th>Name</th>
@@ -52,12 +52,11 @@
 
                      <tr>
                          <th>Email</th>
-                         <td>{{$data['user']->route}}</td>
+                         <td>{{$data['user']->email}}</td>
                      </tr>
-
                     <tr>
-                        <th>Created By</th>
-                        <td>{{\App\User::find($data['user']->created_by)->name}}</td>
+                        <th>Password</th>
+                        <td>{{$data['user']->password}}</td>
                     </tr>
 
 
@@ -73,14 +72,14 @@
                         <th>Deleted At</th>
                         <td></td>
                     </tr>
-                    <tr>
-                        <th>Updated By</th>
-                        <td>
-                            @if(!empty($data['user']->updated_by))
-                                {{\App\User::find($data['user']->updated_by)->name}}
-                            @endif
-                            {{$data['user']->updated_at}}</td>
-                    </tr>
+{{--                    <tr>--}}
+{{--                        <th>Updated By</th>--}}
+{{--                        <td>--}}
+{{--                            @if(!empty($data['user']->updated_by))--}}
+{{--                                {{\App\User::find($data['user']->updated_by)->name}}--}}
+{{--                            @endif--}}
+{{--                            {{$data['user']->updated_at}}</td>--}}
+{{--                    </tr>--}}
                     </thead>
                 </table>
             </div>

@@ -31,9 +31,41 @@ Route::get('/dashboard', function () {
 Route::get('/welcome/{users}', function ($user) {
     return 'welcome  '.$user;
 });
+
+
 Route::prefix('/')->namespace('Frontend')->group(function() {
     Route::get('', 'FrontController@index')->name('frontend.index');
+    Route::get('category/{slug}', 'FrontController@category')->name('frontend.category');
+    Route::get('subcategory/{slug}', 'FrontController@subcategory')->name('frontend.subcategory');
+    Route::get('product_line/{slug}', 'FrontController@product_line')->name('frontend.product_line');
+    Route::get('product/{slug}', 'FrontController@product')->name('frontend.product');
+    Route::post('cart/add', 'CartController@add')->name('frontend.cart.add');
+    Route::get('cart', 'CartController@index')->name('frontend.cart.index');
+    Route::delete('cart/delete/{id}', 'CartController@destroy')->name('cart.destroy');
+
 });
+
+    Route::get('cart/checkout', 'Frontend\CustomerController@checkout')->name('customer.checkout');
+    Route::post('payment/paywithpaypal', 'Frontend\PaymentController@payWithpaypal')->name('payment.paywithpaypal');
+    Route::get('payment/paymentstatus', 'Frontend\PaymentController@getPaymentStatus')->name('paypal.paymentstatus');
+    Route::get('payment/successpayment', 'Frontend\PaymentController@successpayment')->name('paypal.successpayment');
+
+
+    Route::get('/customer/forgot', 'Frontend\PasswordResetController@forgot')->name('customer.forgotemail');
+    Route::post('/customer/sendforgotemail', 'Frontend\PasswordResetController@sendforgotemail')->name('customer.sendforgotemail');
+    Route::get('/customer/reset/{token}', 'Frontend\PasswordResetController@reset')->name('customer.reset');
+    Route::post('/customer/resetpassword', 'Frontend\PasswordResetController@resetpassword')->name('customer.resetpassword');
+
+    Route::prefix('customer')->group(function () {
+    Route::get('/', 'CustomerController@index')->name('customer.dashboard');
+    Route::get('dashboard', 'Frontend\CustomerController@index')->name('customer.dashboard');
+    Route::get('register', 'Frontend\CustomerController@create')->name('customer.register');
+    Route::post('register', 'Frontend\CustomerController@store')->name('customer.register.store');
+    Route::get('login', 'Auth\CustomerLoginController@login')->name('customer.auth.login');
+    Route::post('login', 'Auth\CustomerLoginController@loginCustomer')->name('customer.auth.loginCustomer');
+    Route::get('logout', 'Auth\CustomerLoginController@logout')->name('customer.auth.logout');
+
+    });
 
 Route::prefix('backend')->middleware('auth')->namespace('Backend')->group(function() {
 //index
@@ -189,6 +221,40 @@ Route::prefix('backend')->middleware('auth')->namespace('Backend')->group(functi
 //delete from database
     Route::delete('user/{id}', 'UserController@destroy')->name('user.destroy');
 
+
+    //index
+    Route::get('product_line', 'Product_LineController@index')->name('product_line.index');
+//create form
+    Route::get('product_line/create', 'Product_LineController@create')->name('product_line.create');
+//Store into database
+    Route::post('product_line', 'Product_LineController@store')->name('product_line.store');
+//view details
+    Route::get('product_line/{id}', 'Product_LineController@show')->name('product_line.show');
+//edit form
+    Route::get('product_line/{id}/edit', 'Product_LineController@edit')->name('product_line.edit');
+//update into database
+    Route::put('product_line/{id}', 'Product_LineController@update')->name('product_line.update');
+//delete from database
+    Route::delete('product_line/{id}', 'Product_LineController@destroy')->name('product_line.destroy');
+
+
+
+
+    Route::get('configuration', 'ConfigurationController@index')->name('configuration.index');
+    Route::get('configuration/create', 'ConfigurationController@create')->name('configuration.create');
+    //Store into database
+    Route::post('configuration', 'ConfigurationController@store')->name('configuration.store');
+//view details
+    Route::get('configuration/{id}', 'ConfigurationController@show')->name('configuration.show');
+//edit form
+    Route::get('configuration/{id}/edit', 'ConfigurationController@edit')->name('configuration.edit');
+//update into database
+    Route::put('configuration/{id}', 'ConfigurationController@update')->name('configuration.update');
+//delete from database
+    Route::delete('configuration/{id}', 'ConfigurationController@destroy')->name('configuration.destroy');
+
+    //get product_line
+    Route::post('subcategory/product_line','SubCategoryController@product_line')->name('subcategory.product_line');
 });
 Auth::routes();
 

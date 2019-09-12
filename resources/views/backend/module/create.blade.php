@@ -37,31 +37,17 @@
             <div class="box-body">
                 @include('includes.flash')
                 @include('includes.error')
-                <form action="{{route('module.store')}}" method="post">
-                    @csrf
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" name="name" class="form-control" id="name"/>
-                        @include('includes.single_field_validation',['field'=>'name'])
-                    </div>
+                {!! Form::open(['route' => 'module.store', 'method' => 'post']) !!}
+                @include('backend.module.mainform')
 
-                    <div class="form-group">
-                        <label for="route">Route</label>
-                        <input type="text" name="route" class="form-control" id="route"/>
-                        @include('includes.single_field_validation',['field'=>'route'])
-                    </div>
 
-                    <div class="form-group">
-                        <label for="status">Status</label><br>
-                        <input type="radio" name="status"  id="name" value="1"/>Active
-                        <input type="radio" name="status"  id="name" value="0" checked />Inactive
-                    </div>
+                <div class="form-group">
 
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-success" value="Save Module"><i class="fa fa-save"></i>Save Module</button>
-                        <button type="submit" class="btn btn-danger" value="Clear"><i class="fa fa-recycle"></i>Cancel</button>
-                    </div>
-                </form>
+                    <button type="submit" class="btn btn-success"   value="Save Module"><i class="fa fa-save"></i>Save Module</button>
+                    <button type="submit" class="btn btn-danger"   value="Clear"><i class="fa fa-recycle"></i>Cancel</button>
+                </div>
+                {!! Form::close() !!}
+
             </div>
             <!-- /.box-body -->
             <div class="box-footer">

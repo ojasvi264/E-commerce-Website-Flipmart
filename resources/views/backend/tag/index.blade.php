@@ -1,5 +1,5 @@
 @extends('layouts.backend')
-@section('title','Tag Create page')
+@section('title','Tag index page')
 
 @section('content')
     <!-- Content Header (Page header) -->

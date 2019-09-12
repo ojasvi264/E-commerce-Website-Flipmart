@@ -1,6 +1,15 @@
 @extends('layouts.backend')
 @section('title','Product Create page')
 @section('js')
+    <script>
+        $("#name").keyup(function(){
+            var Text = $(this).val();
+            Text = Text.toLowerCase();
+            Text = Text.replace(/[^a-zA-Z0-9]+/g,'-');
+            $("#slug").val(Text);
+        });
+    </script>
+
     @include('backend.product.Include.add_row')
     <script>
         $.ajaxSetup({
@@ -9,12 +18,12 @@
             }
         });
         $(document).ready(function () {
-            $('#category_id').change(function(){
+            $('#category_id').change(function () {
                 category_id = $(this).val();
-                path="{{route('category.subcategory')}}";
+                path = "{{route('category.subcategory')}}";
                 $.ajax({
                     url: path,
-                    data: {'cid' :category_id},
+                    data: {'cid': category_id},
                     method: 'post',
                     datatype: 'text',
                     success: function (response) {
@@ -24,7 +33,22 @@
                     }
                 });
             });
+            $('body').on('change', '#subcategory_id', function () {
 
+                subcategory_id = $('#subcategory_id').val();
+                path = "{{route('subcategory.product_line')}}";
+                $.ajax({
+                    url: path,
+                    data: {'scid': subcategory_id},
+                    method: 'post',
+                    datatype: 'text',
+                    success: function (response) {
+                        $('#product_line_id').empty();
+                        $('#product_line_id').append(response);
+
+                    }
+                });
+            });
         });
     </script>
 @endsection
@@ -88,6 +112,14 @@
                         </select>
                         @include('includes.single_field_validation',['field'=>'subcategory_name'])
                     </div>
+
+                    <div class="form-group">
+                        <label for="product_line_id">Product Line</label>
+                        <select name="product_line_id" id="product_line_id" class="form-control">
+                            <option value="">Select Product Line</option>
+                        </select>
+                    </div>
+
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" name="name" class="form-control" id="name" value="{{$data['product']->name}}"/>
@@ -149,21 +181,21 @@
                     <div class="form-group">
                         <label for="status">Feature Key</label><br>
                         @if($data['product']->feature_key==1)
-                            <input type="radio" name="status"  id="name" value="1" checked/>Active
-                            <input type="radio" name="status"  id="name" value="0" />Inactive
+                            <input type="radio" name="feature_key"  id="feature_key" value="1" checked/>Active
+                            <input type="radio" name="feature_key"  id="feature_key" value="0" />Inactive
                         @else
-                            <input type="radio" name="status"  id="name" value="1"/>Active
-                            <input type="radio" name="status"  id="name" value="0" checked />Inactive
+                            <input type="radio" name="feature_key"  id="feature_key" value="1"/>Active
+                            <input type="radio" name="feature_key"  id="feature_key" value="0" checked />Inactive
                         @endif
                     </div>
                     <div class="form-group">
                         <label for="status">Discount Key</label><br>
                         @if($data['product']->discount_key==1)
-                            <input type="radio" name="status"  id="name" value="1" checked/>Active
-                            <input type="radio" name="status"  id="name" value="0" />Inactive
+                            <input type="radio" name="discount_key"  id="discount_key" value="1" checked/>Active
+                            <input type="radio" name="discount_key"  id="discount_key" value="0" />Inactive
                         @else
-                            <input type="radio" name="status"  id="name" value="1"/>Active
-                            <input type="radio" name="status"  id="name" value="0" checked />Inactive
+                            <input type="radio" name="discount_key"  id="discount_key" value="1"/>Active
+                            <input type="radio" name="discount_key"  id="discount_key" value="0" checked />Inactive
                         @endif
                     </div>
 

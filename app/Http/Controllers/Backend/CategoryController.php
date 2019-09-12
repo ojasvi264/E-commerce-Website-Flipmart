@@ -41,9 +41,20 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $request->request->add(['created_by'=>Auth::user()->id]);
-        //dd($request->all());
-        $category=Category::create($request->all());
+        $request->request->add(['created_by' => Auth::user()->id]);
+        if (!empty($request->has('photo'))) {
+            //dd($request->all());
+            $category_image = $request->file('photo');
+
+            $image_name = uniqid() . '.' . $category_image->getClientOriginalExtension();
+            $destinationPath = public_path('/images/category');
+            $category_image->move($destinationPath, $image_name);
+            $request->request->add(['image' => $image_name]);
+        }
+
+
+        $category = Category::create($request->all());
+
         if ($category) {
             $request->session()->flash('success_message', 'Category created Successfully');
             return redirect()->route('category.index');
@@ -54,7 +65,6 @@ class CategoryController extends Controller
 
         }
     }
-
     /**
      * Display the specified resource.
      *
@@ -88,8 +98,18 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, $id)
     {
-        $request->request->add(['created_by'=>Auth::user()->id]);
         //dd($request->all());
+        $request->request->add(['updated_by'=>Auth::user()->id]);
+       if ($request->file('photo')){
+            $category_image = $request->file('photo');
+
+            $image_name = uniqid().'.'.$category_image->getClientOriginalExtension();
+            $destinationPath = public_path('/images/category');
+            $category_image->move($destinationPath, $image_name);
+            $request->request->add(['image' => $image_name]);
+        }
+
+
         $category=Category::find($id);
         if ($category->update($request->all())) {
             $request->session()->flash('success_message', 'Category Updated Successfully');
@@ -121,7 +141,7 @@ class CategoryController extends Controller
     function subcategory()
     {
         $category = Category::find($_POST['cid']);
-        $ht = '';
+        $ht = "<option value=''> Select SubCategory</option>";
         foreach ($category->subcategories as $subcategory) {
             $ht .= "<option value='$subcategory->id'>$subcategory->name</option>";
         }

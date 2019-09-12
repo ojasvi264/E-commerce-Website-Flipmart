@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Requests\Backend\UserRequest;
+use App\Model\Category;
 use App\Model\Module;
 use App\Model\Permission;
 use App\Model\Role;
@@ -32,7 +33,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        $data['roles']=Role::all();
+        $data['roles'] = Role::pluck('name','id');
+        //$data['roles']=Role::all();
         return view('backend.user.create',compact('data'));
     }
 
@@ -78,7 +80,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $data['roles']=Role::all();
+        $data['roles'] = Role::pluck('name','id');
+       // $data['roles']=Role::all();
         $data['user']=User::find($id);
         return view('backend.user.edit',compact('data'));
     }

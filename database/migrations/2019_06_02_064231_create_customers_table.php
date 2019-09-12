@@ -23,7 +23,7 @@ class CreateCustomersTable extends Migration
             $table->string('username')->unique();
             $table->string('password');
             $table->string('verification_key');
-            $table->dateTime('last_login');
+            $table->dateTime('last_login')->nullable();
             $table->boolean('status')->default(0);
             $table->timestamps();
         });

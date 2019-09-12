@@ -1,5 +1,5 @@
 @extends('layouts.backend')
-@section('title','Permission Create page')
+@section('title','Permission index page')
 
 @section('content')
     <!-- Content Header (Page header) -->

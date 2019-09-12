@@ -1,19 +1,19 @@
 @extends('layouts.backend')
-@section('title','Tag Create page')
+@section('title','Configuration index page')
 
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Tag Management
-            <a href="{{route('tag.create')}}" class="btn btn-success">
+            Configuration Management
+            <a href="{{route('configuration.create')}}" class="btn btn-success">
                 <i class="fa fa-plus"></i>
                 Create
             </a>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Tag</a></li>
+            <li><a href="#">Configuration</a></li>
             <li class="active">Create page</li>
         </ol>
     </section>
@@ -24,7 +24,7 @@
         <!-- Default box -->
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Create Tag</h3>
+                <h3 class="box-title">Create Configuration</h3>
 
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
@@ -41,36 +41,29 @@
                         <tr>
                             <th>SN</th>
                             <th>Name</th>
-                            <th>Rank</th>
-                            <th>Status</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>Phone</th>
+                            <th>Website</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                     @php($i=1)
-                    @foreach($data['tags'] as $tag)
+                    @foreach($data['configurations'] as $configuration)
                         <tr>
                             <td>{{$i++}}</td>
-                            <td>{{$tag->name}}</td>
-                            <td>{{$tag->rank}}</td>
+                            <td>{{$configuration->name}}</td>
+                            <td>{{$configuration->email}}</td>
+                            <td>{{$configuration->address}}</td>
+                            <td>{{$configuration->phone}}</td>
+                            <td>{{$configuration->website}}</td>
                             <td>
-                                @if($tag->status==1)
-                                    <span class="label label-success">Active</span>
-                                @else
-                                    <span class="label label-danger">InActive</span>
-                                 @endif
-                            </td>
-
-                            <td>
-                                <a href="{{route('tag.show',$tag->id)}}" class="btn btn-info">
-                                    <i class="fa fa-eye"></i>
-                                    View
-                                </a>
-                                <a href="{{route('tag.edit',$tag->id)}}" class="btn btn-warning">
+                                <a href="{{route('configuration.edit',$configuration->id)}}" class="btn btn-warning">
                                     <i class="fa fa-pencil"></i>
                                     Edit
                                 </a>
-                                <form action="{{route('tag.destroy',$tag->id)}}" method="post"
+                                <form action="{{route('configuration.destroy',$configuration->id)}}" method="post"
                                       onsubmit="return confirm('Are you sure?')">
                                     @csrf
                                     <input type="hidden" name="_method" value="DELETE"/>

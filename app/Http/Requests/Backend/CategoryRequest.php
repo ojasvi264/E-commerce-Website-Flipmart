@@ -4,7 +4,7 @@ namespace App\Http\Requests\Backend;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryRequest extends FormRequest
+class   CategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,6 +29,7 @@ class CategoryRequest extends FormRequest
             'slug' => 'required|max:191|string|unique:categories'.(request()->method()=="POST"?'':',slug,'.$this->id),
             'meta_keyword' => 'string|max:191',
             'meta_description' => 'string|max:191',
+            'photo'=>'max:500',
         ];
     }
     function messages()
@@ -47,6 +48,8 @@ class CategoryRequest extends FormRequest
 
             'meta_keyword.string'=>'Meta keyword must be of string type',
             'meta_description.string'=>'Meta description must be of string type',
+
+            'photo.file'=>'Photo file must be file type',
             ];
     }
 }

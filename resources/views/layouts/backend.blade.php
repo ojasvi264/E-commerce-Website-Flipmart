@@ -260,6 +260,28 @@
                         <li><a href="{{route('user.index')}}"><i class="fa fa-circle-o"></i> List</a></li>
                     </ul>
                 </li>
+
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-files-o"></i>
+                        <span>Product Line Management</span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{route('product_line.create')}}"><i class="fa fa-circle-o"></i> Create</a></li>
+                        <li><a href="{{route('product_line.index')}}"><i class="fa fa-circle-o"></i> List</a></li>
+                    </ul>
+                </li>
+
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-files-o"></i>
+                        <span>Configuration Management</span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{route('configuration.create')}}"><i class="fa fa-circle-o"></i> Create</a></li>
+                        <li><a href="{{route('configuration.index')}}"><i class="fa fa-circle-o"></i> List</a></li>
+                    </ul>
+                </li>
             </ul>
         </section>
         <!-- /.sidebar -->

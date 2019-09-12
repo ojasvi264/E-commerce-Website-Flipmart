@@ -10,10 +10,14 @@ class SubCategory extends Model
     protected $fillable=['category_id','name','rank','slug','meta_keyword','meta_description','created_by','updated_by','status'];
 
     function category(){
-        $this->belongsTo(Category::class);
+        return  $this->belongsTo(Category::class);
     }
     function products(){
-        $this->hasMany(Product::class);
+        return $this->hasMany(Product::class);
+    }
+
+    function product_lines(){
+        return $this->hasMany(Product_Line::class,'subcategory_id');
     }
 }
 

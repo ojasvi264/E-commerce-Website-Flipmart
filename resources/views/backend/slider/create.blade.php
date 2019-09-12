@@ -24,7 +24,7 @@
         <!-- Default box -->
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Create Slider</h3>
+                <h3 class="box-title">Title</h3>
 
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
@@ -37,45 +37,17 @@
             <div class="box-body">
                 @include('includes.flash')
                 @include('includes.error')
-                <form action="{{route('slider.store')}}" method="post">
-                    @csrf
-                    <div class="form-group">
-                        <label for="image">Image</label>
-                        <input type="file" name="image" class="form-control" id="image"/>
-                        @include('includes.single_field_validation',['field'=>'image'])
-                    </div>
-
-                    <div class="form-group">
-                        <label for="title">Title</label>
-                        <input type="string" name="title" class="form-control" id="title"/>
-                        @include('includes.single_field_validation',['field'=>'title'])
-                    </div>
+                {!! Form::open(['route' => 'slider.store', 'method' => 'post','files' => true]) !!}
+                @include('backend.slider.mainform')
 
 
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea name="description" class="form-control" id="description" cols="30"rows="3"></textarea>
-                        @include('includes.single_field_validation',['field'=>'description'])
-                    </div>
+                <div class="form-group">
 
-                    <div class="form-group">
-                        <label for="status">Status</label><br>
-                        <input type="radio" name="status"  id="name" value="1" />Active
-                        <input type="radio" name="status"  id="name" value="0" checked />Inactive
-                    </div>
+                    <button type="submit" class="btn btn-success"   value="Save Slider"><i class="fa fa-save"></i>Save Slider</button>
+                    <button type="submit" class="btn btn-danger"   value="Clear"><i class="fa fa-recycle"></i>Cancel</button>
+                </div>
+                {!! Form::close() !!}
 
-
-                    <div class="form-group">
-                        <label for="link">Link</label>
-                        <textarea name="link" class="form-control" id="link" cols="30"rows="3"></textarea>
-                        @include('includes.single_field_validation',['field'=>'link'])
-                    </div>
-
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-success" value="Save Slider"><i class="fa fa-save"></i>Save Slider</button>
-                        <button type="submit" class="btn btn-danger" value="Clear"><i class="fa fa-recycle"></i>Cancel</button>
-                    </div>
-                </form>
             </div>
             <!-- /.box-body -->
             <div class="box-footer">

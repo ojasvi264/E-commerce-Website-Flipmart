@@ -26,7 +26,7 @@ class SliderRequest extends FormRequest
         return [
             'title'=>'required|string',
             'description'=>'required|string',
-            'Image'=>'file',
+            'photo'=>'max:500',
             'link'=>'required|string',
         ];
     }
@@ -38,7 +38,7 @@ class SliderRequest extends FormRequest
           'description.required'=>'Description field is required',
           'description.string'=>'Description field must be string type',
           //'Image.required'=>'Image field is required',
-          'Image.file'=>'Image file must be file type',
+          'photo.file'=>'Photo file must be file type',
           'link.required'=>'Link field is required',
           'link.string'=>'Link field must be string type',
         ];

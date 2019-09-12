@@ -1,6 +1,15 @@
 @extends('layouts.backend')
 @section('title','Category Create page')
-
+@section('js')
+    <script>
+        $("#name").keyup(function(){
+            var Text = $(this).val();
+            Text = Text.toLowerCase();
+            Text = Text.replace(/[^a-zA-Z0-9]+/g,'-');
+            $("#slug").val(Text);
+        });
+    </script>
+@endsection
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -37,49 +46,17 @@
             <div class="box-body">
                 @include('includes.flash')
                 @include('includes.error')
-                <form action="{{route('category.store')}}" method="post">
-                    @csrf
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" name="name" class="form-control" id="name"/>
-                        @include('includes.single_field_validation',['field'=>'name'])
-                    </div>
-
-                    <div class="form-group">
-                        <label for="rank">Rank</label>
-                        <input type="text" name="rank" class="form-control" id="rank"/>
-                        @include('includes.single_field_validation',['field'=>'rank'])
-                    </div>
+                {!! Form::open(['route' => 'category.store', 'method' => 'post','files' => true]) !!}
+                @include('backend.category.mainform')
 
 
-                    <div class="form-group">
-                        <label for="slug">Slug</label>
-                        <input type="text" name="slug" class="form-control" id="slug"/>
-                        @include('includes.single_field_validation',['field'=>'slug'])
-                    </div>
+                <div class="form-group">
 
-                    <div class="form-group">
-                        <label for="status">Status</label><br>
-                        <input type="radio" name="status"  id="name" value="1" />Active
-                        <input type="radio" name="status"  id="name" value="0" checked />Inactive
-                    </div>
+                    <button type="submit" class="btn btn-success"   value="Save Category"><i class="fa fa-save"></i>Save Category</button>
+                    <button type="submit" class="btn btn-danger"   value="Clear"><i class="fa fa-recycle"></i>Cancel</button>
+                </div>
+                {!! Form::close() !!}
 
-                    <div class="form-group">
-                        <label for="meta_keyword">Meta_keyword</label>
-                        <textarea name="meta_keyword" class="form-control" id="meta_keyword" cols="30"rows="3"></textarea>
-                        @include('includes.single_field_validation',['field'=>'meta_keyword'])
-                    </div>
-
-                    <div class="form-group">
-                        <label for="meta_description">Meta_description</label>
-                        <textarea name="meta_description" class="form-control" id="meta_description" cols="30"rows="3"></textarea>
-                        @include('includes.single_field_validation',['field'=>'meta_description'])
-                    </div>
-
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-success" value="Save Category"><i class="fa fa-save"></i>Save Category</button>
-                        <button type="submit" class="btn btn-danger" value="Clear"><i class="fa fa-recycle"></i>Cancel</button>
-                    </div>
             </div>
             <!-- /.box-body -->
             <div class="box-footer">

@@ -50,6 +50,11 @@
                         <th>SubCategory Name</th>
                         <td>{{$data['product']->subcategory->name}}</td>
                     </tr>
+
+                    <tr>
+                        <th>Product Line Name</th>
+                        <td>{{$data['product']->product_line->name}}</td>
+                    </tr>
                     <tr>
                         <th>Price</th>
                         <td>{{$data['product']->price}}</td>

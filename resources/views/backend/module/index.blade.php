@@ -1,5 +1,5 @@
 @extends('layouts.backend')
-@section('title','Module Create page')
+@section('title','Module index page')
 
 @section('content')
     <!-- Content Header (Page header) -->

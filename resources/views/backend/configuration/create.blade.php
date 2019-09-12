@@ -41,65 +41,65 @@
                     @csrf
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" name="name" class="form-control" id="name" value="{{$data['configuration']->name}}"/>
+                        <input type="text" name="name" class="form-control" id="name"/>
                         @include('includes.single_field_validation',['field'=>'name'])
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" name="email" class="form-control" id="email" value="{{$data['configuration']->email}}"/>
+                        <input type="email" name="email" class="form-control" id="email" />
                         @include('includes.single_field_validation',['field'=>'email'])
                     </div>
                     <div class="form-group">
                         <label for="phone">Phone</label>
-                        <input type="number" name="phone" class="form-control" id="phone" value="{{$data['configuration']->phone}}"/>
+                        <input type="number" name="phone" class="form-control" id="phone" />
                         @include('includes.single_field_validation',['field'=>'phone'])
                     </div>
 
                     <div class="form-group">
                         <label for="website">Website</label>
-                        <input type="text" name="website" class="form-control" id="website" value="{{$data['configuration']->website}}"/>
+                        <input type="text" name="website" class="form-control" id="website" />
                         @include('includes.single_field_validation',['field'=>'website'])
                     </div>
                     <div class="form-group">
                         <label for="address">Address</label>
-                        <input type="text" name="address" class="form-control" id="address" value="{{$data['configuration']->address}}"/>
+                        <input type="text" name="address" class="form-control" id="address" />
                         @include('includes.single_field_validation',['field'=>'address'])
                     </div>
 
                     <div class="form-group">
                         <label for="logo">Logo</label>
-                        <input type="file" name="logo" class="form-control" id="logo" value="{{$data['configuration']->logo}}"/>
+                        <input type="file" name="logo" class="form-control" id="logo" />
                         @include('includes.single_field_validation',['field'=>'logo'])
                     </div>
 
                     <div class="form-group">
                         <label for="fav_icon">Fav Icon</label>
-                        <input type="file" name="fav_icon" class="form-control" id="fav_icon" value="{{$data['configuration']->fav_icon}}"/>
+                        <input type="file" name="fav_icon" class="form-control" id="fav_icon"/>
                         @include('includes.single_field_validation',['field'=>'fav_icon'])
                     </div>
 
 
                     <div class="form-group">
                         <label for="fb_link">Facebook Link</label>
-                        <input type="text" name="fb_link" class="form-control" id="fb_link" value="{{$data['configuration']->fb_link}}"/>
+                        <input type="text" name="fb_link" class="form-control" id="fb_link"/>
                         @include('includes.single_field_validation',['field'=>'fb_link'])
                     </div>
 
                     <div class="form-group">
                         <label for="twitter_link">Twitter Link</label>
-                        <input type="text" name="twitter_link" class="form-control" id="twitter_link" value="{{$data['configuration']->twitter_link}}"/>
+                        <input type="text" name="twitter_link" class="form-control" id="twitter_link" />
                         @include('includes.single_field_validation',['field'=>'twitter_link'])
                     </div>
 
                     <div class="form-group">
                         <label for="insta_link">Instagram Link</label>
-                        <input type="text" name="insta_link" class="form-control" id="insta_link" value="{{$data['configuration']->insta_link}}"/>
+                        <input type="text" name="insta_link" class="form-control" id="insta_link"/>
                         @include('includes.single_field_validation',['field'=>'insta_link'])
                     </div>
 
                     <div class="form-group">
                         <label for="youtube_link">Youtube Link</label>
-                        <input type="text" name="youtube_link" class="form-control" id="youtube_link" value="{{$data['configuration']->youtube_link}}"/>
+                        <input type="text" name="youtube_link" class="form-control" id="youtube_link"/>
                         @include('includes.single_field_validation',['field'=>'youtube_link'])
                     </div>
 

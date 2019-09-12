@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Requests\Backend\PermissionRequest;
+use App\Model\Category;
 use App\Model\Module;
 use App\Model\Permission;
 use Illuminate\Http\Request;
@@ -30,7 +31,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        $data['modules']=Module::all();
+        $data['modules'] = Module::pluck('name','id');
         return view('backend.permission.create',compact('data'));
     }
 
@@ -64,6 +65,7 @@ class PermissionController extends Controller
      */
     public function show($id)
     {
+        $data['modules'] = Module::pluck('name','id');
         $data['permission']=Permission::find($id);
         return view('backend.permission.show',compact('data'));
     }
@@ -76,7 +78,7 @@ class PermissionController extends Controller
      */
     public function edit($id)
     {
-        $data['modules']=Module::all();
+        $data['modules'] = Module::pluck('name','id');
         $data['permission']=Permission::find($id);
         return view('backend.permission.edit',compact('data'));
     }

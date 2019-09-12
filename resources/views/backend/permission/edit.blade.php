@@ -41,47 +41,14 @@
             <div class="box-body">
                 @include('includes.flash')
                 @include('includes.error')
-                <form action="{{route('permission.update',$data['permission']->id)}}" method="post">
-                    <input type="hidden" name="_method" value="PUT"/>
-                    @csrf
-                    <div class="form-group">
-                        <label for="module_id">Module Id</label>
-                        <select name="module_id" class="form-control">
-                            <option value="">Select Module</option>
-                            @foreach($data['modules'] as $module)
-                                <option value="{{$module->id}}">{{$module->name}}</option>
-                            @endforeach
-                        </select>
-                        @include('includes.single_field_validation',['field'=>'module_id'])
-                    </div>
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" name="name" class="form-control" id="name" value="{{$data['permission']->name}}"/>
-                        @include('includes.single_field_validation',['field'=>'name'])
-                    </div>
+                {!! Form::model($data['permission'], ['route' => ['permission.update', $data['permission']->id],'method' => 'put']) !!}
+                @include('backend.permission.mainform')
+                <div class="form-group">
+                    {{ Form::button('<i class="fa fa-save"></i> Update permission', ['type' => 'submit', 'class' => 'btn btn-warning btn-sm'] )  }}
+                    <button type="submit" class="btn btn-danger"   value="Clear"><i class="fa fa-recycle"></i>Cancel</button>
+                </div>
+                {!! Form::close() !!}
 
-                    <div class="form-group">
-                        <label for="route">Route</label>
-                        <input type="text" name="route" class="form-control" id="route" value="{{$data['permission']->route}}"/>
-                        @include('includes.single_field_validation',['field'=>'route'])
-                    </div>
-
-                    <div class="form-group">
-                        <label for="status">Status</label><br>
-                        @if($data['permission']->status==1)
-                            <input type="radio" name="status"  id="name" value="1" checked/>Active
-                            <input type="radio" name="status"  id="name" value="0" />Inactive
-                        @else
-                            <input type="radio" name="status"  id="name" value="1"/>Active
-                            <input type="radio" name="status"  id="name" value="0" checked />Inactive
-                         @endif
-                    </div>
-
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-success" value="Update Permission"><i class="fa fa-save"></i>Update Permission</button>
-                        <button type="submit" class="btn btn-danger" value="Clear"><i class="fa fa-recycle"></i>Cancel</button>
-                    </div>
-                </form>
             </div>
             <!-- /.box-body -->
             <div class="box-footer">

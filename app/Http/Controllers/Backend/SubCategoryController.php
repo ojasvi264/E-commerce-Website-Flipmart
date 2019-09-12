@@ -30,7 +30,7 @@ class SubCategoryController extends Controller
      */
     public function create()
     {
-        $data['categories']=Category::all();
+        $data['categories'] = Category::pluck('name','id');
         return view('backend.subcategory.create',compact('data'));
     }
 
@@ -75,6 +75,7 @@ class SubCategoryController extends Controller
      */
     public function edit($id)
     {
+        $data['categories'] = Category::pluck('name','id');
         $data['subcategory']=SubCategory::find($id);
         return view('backend.subcategory.edit',compact('data'));
     }
@@ -116,5 +117,15 @@ class SubCategoryController extends Controller
             $request->session()->flash('error_message','SunCategory Deleted Failed');
         }
         return redirect()->route('subcategory.index');
+    }
+
+    function product_line()
+    {
+        $subcategory = SubCategory::find($_POST['scid']);
+        $ht =  "<option value=''> Select Product_line</option>";
+        foreach ($subcategory->product_lines as $product_line) {
+            $ht .= "<option value='$product_line->id'>$product_line->name</option>";
+        }
+        return $ht;
     }
 }

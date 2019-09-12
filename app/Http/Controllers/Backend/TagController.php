@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Requests\Backend\TagRequest;
+use App\Model\Category;
 use App\Model\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -95,8 +96,9 @@ class TagController extends Controller
         if ($tag->update($request->all())) {
             $request->session()->flash('success_message', 'Tag Updated Successfully');
 
+
         }else{
-            $request->session()->flash('error_message','Tag Updated Failed');
+            $request->session()->flash('error_message','Tag updated Failed');
         }
         return redirect()->route('tag.index');
     }

@@ -39,40 +39,13 @@
                 @include('includes.error')
                 <form action="{{route('user.store')}}" method="post">
                     @csrf
-
+                    @include('backend.user.mainform')
                     <div class="form-group">
-                        <label for="role_id">Role Id</label>
-                        <select name="role_id" class="form-control">
-                            <option value="">Select Role</option>
-                            @foreach($data['roles'] as $role)
-                                <option value="{{$role->id}}">{{$role->name}}</option>
-                            @endforeach
-                        </select>
-                        @include('includes.single_field_validation',['field'=>'role_id'])
-                    </div>
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="string" name="name" class="form-control" id="name"/>
-                        @include('includes.single_field_validation',['field'=>'name'])
-                    </div>
-
-                    <div class="form-group">
-                        <label for="route">Email</label>
-                        <input type="email" name="email" class="form-control" id="email"/>
-                        @include('includes.single_field_validation',['field'=>'email'])
-                    </div>
-
-                    <div class="form-group">
-                        <label for="route">Password</label>
-                        <input type="password" name="password" class="form-control" id="password"/>
-                        @include('includes.single_field_validation',['field'=>'password'])
-                    </div>
-
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-success" value="Save User"><i class="fa fa-save"></i>Save User</button>
-                        <button type="submit" class="btn btn-danger" value="Clear"><i class="fa fa-recycle"></i>Cancel</button>
+                        <button type="submit" class="btn btn-success"   value="Save User"><i class="fa fa-save"></i>Save User</button>
+                        <button type="submit" class="btn btn-danger"   value="Clear"><i class="fa fa-recycle"></i>Cancel</button>
                     </div>
                 </form>
+
             </div>
             <!-- /.box-body -->
             <div class="box-footer">

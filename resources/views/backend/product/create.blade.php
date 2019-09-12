@@ -1,6 +1,15 @@
 @extends('layouts.backend')
 @section('title','Product Create')
 @section('js')
+    <script>
+        $("#name").keyup(function(){
+            var Text = $(this).val();
+            Text = Text.toLowerCase();
+            Text = Text.replace(/[^a-zA-Z0-9]+/g,'-');
+            $("#slug").val(Text);
+        });
+    </script>
+
     @include('backend.product.Include.add_row')
     <script>
         $.ajaxSetup({
@@ -20,11 +29,29 @@
                     success: function (response) {
                         $('#subcategory_id').empty();
                         $('#subcategory_id').append(response);
-                        
+
                     }
                 });
             });
-            
+            $('body').on('change' , '#subcategory_id' , function(){
+
+                subcategory_id = $('#subcategory_id').val();
+                path="{{route('subcategory.product_line')}}";
+                $.ajax({
+                    url: path,
+                    data: {'scid' :subcategory_id},
+                    method: 'post',
+                    datatype: 'text',
+                    success: function (response) {
+                        $('#product_line_id').empty();
+                        $('#product_line_id').append(response);
+
+                    }
+                });
+            });
+
+
+
         });
     </script>
 @endsection
@@ -80,11 +107,22 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="name">SubCategory Name</label>
+                                    <label for="subcategory_id">SubCategory Name</label>
                                     <select name="subcategory_id" id="subcategory_id" class="form-control">
                                         <option value="">Select SubCategory</option>
                                     </select>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="product_line_id">Product Line</label>
+                                    <select name="product_line_id" id="product_line_id" class="form-control">
+                                        <option value="">Select Product Line</option>
+{{--                                        @foreach($data['product_lines'] as $product_line)--}}
+{{--                                            <option value="{{$product_line->id}}">{{$product_line->name}}</option>--}}
+{{--                                            @endforeach--}}
+                                    </select>
+                                </div>
+
                                 <div class="form-group">
                                     <label for="name"> Name</label>
                                     <input type="text" name="name" class="form-control" id="name"/>
@@ -102,7 +140,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="discount"> Discount</label>
-                                    <input type="number" discount="discount" class="form-control" id="discount"/>
+                                    <input type="number" name="discount" class="form-control" id="discount"/>
                                     @include('includes.single_field_validation',['field'=>'discount'])
                                 </div>
 

@@ -41,41 +41,14 @@
             <div class="box-body">
                 @include('includes.flash')
                 @include('includes.error')
-                <form action="{{route('user.update',$data['user']->id)}}" method="post">
-                    <input type="hidden" name="_method" value="PUT"/>
-                    @csrf
-                    <div class="form-group">
-                        <label for="role_id">Role Id</label>
-                        <select name="role_id" class="form-control">
-                            <option value="">Select Role</option>
-                            @foreach($data['roles'] as $role)
-                                <option value="{{$role->id}}">{{$role->name}}</option>
-                            @endforeach
-                        </select>
-                        @include('includes.single_field_validation',['field'=>'role_id'])
-                    </div>
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" name="name" class="form-control" id="name" value="{{$data['user']->name}}"/>
-                        @include('includes.single_field_validation',['field'=>'name'])
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" name="password" class="form-control" id="password" value="{{$data['user']->password}}"/>
-                        @include('includes.single_field_validation',['field'=>'password'])
-                    </div>
+                {!! Form::model($data['user'], ['route' => ['user.update', $data['user']->id],'method' => 'put']) !!}
+                @include('backend.user.mainform')
+                <div class="form-group">
+                    {{ Form::button('<i class="fa fa-save"></i> Update User', ['type' => 'submit', 'class' => 'btn btn-warning btn-sm'] )  }}
+                    <button type="submit" class="btn btn-danger"   value="Clear"><i class="fa fa-recycle"></i>Cancel</button>
+                </div>
+                {!! Form::close() !!}
 
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" name="email" class="form-control" id="email" value="{{$data['user']->email}}"/>
-                        @include('includes.single_field_validation',['field'=>'email'])
-                    </div>
-
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-success" value="Update User"><i class="fa fa-save"></i>Update User</button>
-                        <button type="submit" class="btn btn-danger" value="Clear"><i class="fa fa-recycle"></i>Cancel</button>
-                    </div>
-                </form>
             </div>
             <!-- /.box-body -->
             <div class="box-footer">

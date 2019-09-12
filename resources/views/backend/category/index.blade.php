@@ -1,5 +1,5 @@
 @extends('layouts.backend')
-@section('title','Category Create page')
+@section('title','Category index page')
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -42,6 +42,9 @@
                         <th>SN</th>
                         <th>Name</th>
                         <th>Rank</th>
+                        <th>Slug</th>
+                        <th>Meta Description</th>
+                        <th>Meta Keyword</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -53,6 +56,9 @@
                         <td>{{$i++}}</td>
                         <td>{{$category->name}}</td>
                         <td>{{$category->rank}}</td>
+                        <td>{{$category->slug}}</td>
+                        <td>{{$category->meta_description}}</td>
+                        <td>{{$category->meta_keyword}}</td>
                         <td>
                         @if($category->status==1)
                             <span class="label label-success">Active</span>

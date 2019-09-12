@@ -1,5 +1,5 @@
 @extends('layouts.backend')
-@section('title','Slider Create page')
+@section('title','Slider index page')
 
 @section('content')
     <!-- Content Header (Page header) -->

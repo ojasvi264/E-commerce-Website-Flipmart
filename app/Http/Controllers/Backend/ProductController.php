@@ -7,6 +7,7 @@ use App\Model\Attribute;
 use App\Model\Category;
 use App\Model\Image;
 use App\Model\Product;
+use App\Model\Product_Line;
 use App\Model\SubCategory;
 use App\Model\Tag;
 use Illuminate\Http\Request;
@@ -37,6 +38,7 @@ class ProductController extends Controller
     {
         $data['categories']=Category::all();
         $data['subcategories']=SubCategory::all();
+        $data['product_lines']=Product_Line::all();
         $data['tags']=Tag::all();
         return view('backend.product.create',compact('data'));
 
@@ -106,6 +108,7 @@ class ProductController extends Controller
     {
         $data['categories']=Category::all();
         $data['subcategories']=SubCategory::all();
+        $data['product_lines']=Product_Line::all();
         $data['product']=Product::find($id);
         return view('backend.product.edit',compact('data'));
     }
@@ -117,9 +120,20 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, $id)
     {
 
+        $request->request->add(['updated_by'=>Auth::user()->id]);
+        //dd($request->all());
+        $product=Product::find($id);
+        if ($product->update($request->all())) {
+            $request->session()->flash('success_message', 'Product Updated Successfully');
+
+
+        }else{
+            $request->session()->flash('error_message','Product updated Failed');
+        }
+        return redirect()->route('product.index');
     }
 
     /**
